@@ -1,3 +1,4 @@
+.DS_Store
 app/config/app.php
 app/storage/databases/*
 app/storage/uploads/*
