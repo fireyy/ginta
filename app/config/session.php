@@ -4,14 +4,19 @@ return array(
 	/*
 	 * Session driver
 	 *
-	 * Available options are: cookie, runtime
+	 * Available options are: cookie, runtime, database
 	 */
-	'driver' => 'runtime',
+	'driver' => 'cookie',
 
 	/*
 	 * Session cookie name
 	 */
 	'cookie' => 'ginta',
+
+	/*
+	 * Session database table name when used with the 'database' driver
+	 */
+	'table' => 'sessions',
 
 	/*
 	 * Session lifespan in seconds

@@ -3,13 +3,12 @@
 /*
  * Home page
  */
-Route::get(array('/', 'home'), function() {
-  $vars["guest"] = Session::get("auth");
-  /*$vars["guest"] = Auth::guest();
+Route::get('/', function() {
+  $vars["guest"] = Auth::guest();
   if(!$vars["guest"]){ 
     $vars["user"] = Auth::user();
-  }*/
-	return View::home($vars);
+  }
+	return Template::create("home",$vars);
 });
 
 /*
@@ -21,14 +20,15 @@ Route::get('login', function() {
   $duoshuo_client = $duoshuo->getClient();
   $parm = array(
     "code" => $code,
-    "redirect_uri" => "/"
+    "redirect_uri" => "/home"
   );
   $result = $duoshuo_client->getAccessToken("code", $parm);
   //var_dump($result);exit();
   $user = User::search(array("duoshuo_uid"=>$result["user_id"]));
   if(!$user){
+    $ct = User::count();
     $uid = User::create(array(
-      "role" => "admin",
+      "role" => ($ct == 0) ? "admin" : "user",
       "status" => "inactive",
       "created" => Date::mysql("now"),
       "duoshuo_uid" => $result["user_id"],
@@ -36,9 +36,16 @@ Route::get('login', function() {
     ));
     Auth::attempt($uid);
   }else{
-    Session::put("auth",$user->id);
-    //Auth::attempt($user->id);
+    Auth::attempt($user->id);
   }
+  return Response::redirect('/');
+});
+
+/*
+ * logout
+ */
+Route::get('logout', function() {
+  Auth::logout();
   return Response::redirect('/');
 });
 

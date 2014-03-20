@@ -22,6 +22,8 @@ class Session {
 		switch($config['driver']) {
 			case 'cookie':
 				return new Session\Drivers\Cookie($config);
+			case 'database':
+				return new Session\Drivers\Database($config);
 			case 'runtime':
 				return new Session\Drivers\Runtime($config);
 		}
