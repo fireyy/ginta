@@ -1,4 +1,5 @@
 ## Ginta
 
-PHP >= 5.3.6
-Mysql or Sqlite
+* PHP >= 5.3.6
+
+* Mysql or Sqlite
