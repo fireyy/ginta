@@ -20,7 +20,7 @@ Route::get('login', function() {
   $duoshuo_client = $duoshuo->getClient();
   $parm = array(
     "code" => $code,
-    "redirect_uri" => "/home"
+    "redirect_uri" => "/"
   );
   $result = $duoshuo_client->getAccessToken("code", $parm);
   //var_dump($result);exit();
@@ -46,6 +46,14 @@ Route::get('login', function() {
  */
 Route::get('logout', function() {
   Auth::logout();
+  return Response::redirect('/');
+});
+
+/*
+ * image upload
+ */
+Route::post('upload', function() {
+  //
   return Response::redirect('/');
 });
 
