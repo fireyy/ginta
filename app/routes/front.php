@@ -8,7 +8,7 @@ Route::get('/', function() {
   if(!$vars["guest"]){ 
     $vars["user"] = Auth::user();
   }
-	return Template::create("home",$vars);
+  return Template::create("home",$vars);
 });
 
 /*
@@ -61,5 +61,5 @@ Route::post('upload', function() {
  * 404 not found
  */
 Route::not_found(function() {
-	return Response::error(404);
+  return Response::error(404);
 });
