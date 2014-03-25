@@ -11,6 +11,16 @@ class Auth {
 	public static function user() {
 		if($id = Session::get(static::$session)) {
 			return User::find($id);
+		}else{
+		  return "0";
+		}
+	}
+  
+	public static function uid() {
+		if($id = Session::get(static::$session)) {
+			return $id;
+		}else{
+		  return 0;
 		}
 	}
 

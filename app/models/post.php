@@ -13,33 +13,26 @@ class Post extends Base {
 	}
 
 	private static function get($row, $val) {
-		return static::left_join(Base::table('users'), Base::table('users.id'), '=', Base::table('posts.author'))
-			->where(Base::table('posts.'.$row), '=', $val)
+		return static::where(Base::table('posts.'.$row), '=', $val)
 			->fetch(array(Base::table('posts.*'),
 				Base::table('users.id as author_id'),
 				Base::table('users.bio as author_bio'),
 				Base::table('users.real_name as author_name')));
 	}
 
-	public static function listing($category = null, $page = 1, $per_page = 10) {
+	public static function listing($page = 1, $per_page = 10) {
 		// get total
-		$query = static::left_join(Base::table('users'), Base::table('users.id'), '=', Base::table('posts.author'))
-			->where(Base::table('posts.status'), '=', 'published');
-
-		if($category) {
-			$query->where(Base::table('posts.category'), '=', $category->id);
-		}
+    $uid = Auth::uid();
+    $query = Query::table(static::table());
+		$query = static::where('author', '=', $uid)->where('status', '=', 'active');
 
 		$total = $query->count();
 
 		// get posts
-		$posts = $query->sort(Base::table('posts.created'), 'desc')
+		$posts = $query->sort('created', 'desc')
 			->take($per_page)
 			->skip(--$page * $per_page)
-			->get(array(Base::table('posts.*'),
-				Base::table('users.id as author_id'),
-				Base::table('users.bio as author_bio'),
-				Base::table('users.real_name as author_name')));
+			->get();
 
 		return array($total, $posts);
 	}

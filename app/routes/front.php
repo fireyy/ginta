@@ -4,9 +4,11 @@
  * Home page
  */
 Route::get('/', function() {
+  //var_dump(convertIntToShortCode(1));exit();
   $vars["guest"] = Auth::guest();
   if(!$vars["guest"]){ 
     $vars["user"] = Auth::user();
+    list($vars["total"], $vars["posts"]) = Post::listing();
   }
   return Template::create("home",$vars);
 });
@@ -53,8 +55,35 @@ Route::get('logout', function() {
  * image upload
  */
 Route::post('upload', function() {
-  //
-  return Response::redirect('/');
+  $result = Iupload::process_image($_FILES["file"]);
+  $json = array();
+  if($result){
+    $author = Auth::user();
+    if($author) $author = $author->id;
+    $post = Post::create(array(
+      "status" => "active",
+      "author" => $author,
+      "images" => $result["filename"],
+      "title" => $result["name"]
+    ));
+    $id = $post->id;
+    $slug = convertIntToShortCode($id);
+    Post::update($id, array(
+      "slug" => $slug
+    ));
+    $json = array(
+      "id" => $post->id,
+      "html" => $post->id,
+      "edit" => $post->id,
+      "thumb" => $result["thumb_name"],
+      "title" => $result["name"],
+      "percent" => $post->id,
+      "menu" => $post->id
+    );
+  }else{
+    echo "fuck";
+  }
+  return Response::create(Json::encode($json), 200, array('content-type' => 'application/json'));
 });
 
 /*

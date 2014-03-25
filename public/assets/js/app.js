@@ -25,9 +25,9 @@ $(function() {
     dictFallbackText: null,
     dictFallbackMessage: null,
     fallback: function() {
-      $(".filechoose").click(function(b) {
+      /*$(".filechoose").click(function(b) {
         window.location.assign($("#uploadSingle a").attr("href"))
-      });
+      });*/
       $(".dz-fallback").hide()
     },
     error: function(b, a, d) {
@@ -60,7 +60,6 @@ $(function() {
   c.on("success", function(b, a, c) {
     a ? ($(b.previewTemplate).addClass("complete").attr("rel", a.id).find(".dropzone").attr("rel", a.id), $(b.previewTemplate).find("a.thumb,a.title").attr("href", a.html), $(b.previewTemplate).find("a.title").text(a.title), $(b.previewTemplate).find("a.edit").attr("href", a.edit), $(b.previewTemplate).find("ul").html(a.menu), $("#percent").stop().animate({
         width: a.percent + "%"
-      }, 300), 80 <= a.percent && $("#percent").addClass("low"), imageDraggable(b.previewTemplate), projectInteraciton($(b.previewTemplate).find(".dropzone")),
-      $("#projects,#myProjects").removeClass("hidden"), $("#createProject").removeClass("inactive")) : ($(b.previewTemplate).remove(), showerror(b.name + " couldn't be uploaded. Please try again."))
+      }, 300), 80 <= a.percent && $("#percent").addClass("low")) : ($(b.previewTemplate).remove(), showerror(b.name + " couldn't be uploaded. Please try again."))
   })
 });

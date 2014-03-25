@@ -201,6 +201,57 @@ class Image {
     return $this;
   }
 
+  public function resizeCrop($dst_w, $dst_h, $src_x, $src_y) {
+    
+    $ratio = 0;
+    $org_w = $dst_w;
+    $org_h = $dst_h;
+
+    // landscape
+    if($this->src_w > $this->src_h) {
+      $ratio = $dst_w / $this->src_w;
+      $dst_h = $this->src_h * $ratio;
+    }
+    // portrait
+    if($this->src_w < $this->src_h) {
+      $ratio = $dst_h / $this->src_h;
+      $dst_w = $this->src_w * $ratio;
+    }
+    // square : use smaller value as the match
+    if($this->src_w == $this->src_h) {
+      if($dst_w > $dst_h) {
+        $dst_w = $dst_h;
+      }else{
+        $dst_h = $dst_w;
+      }
+    }
+
+    $dst_image = imagecreatetruecolor($dst_w, $dst_h);
+    
+    imagecopyresampled($dst_image, $this->src_image, 0, 0, 0, 0, $dst_w, $dst_h, $this->src_w, $this->src_h);
+
+    $this->dst_image = imagecreatetruecolor($org_w, $org_h);
+
+    $params = array(
+      'dst_image' => $this->dst_image,
+      'src_image' => $dst_image,
+
+      'dst_x' => 0,
+      'dst_y' => 0,
+      'src_x' => $src_x,
+      'src_y' => $src_y,
+
+      'dst_w' => $org_w,
+      'dst_h' => $org_h,
+      'src_w' => $org_w,
+      'src_h' => $org_h
+    );
+
+    call_user_func_array('imagecopyresampled', array_values($params));
+
+    return $this;
+  }
+
   public function palette($percentages = array(0.2, 0.7, 0.5)) {
 
     // Now set dimensions on where to pull color values from (based on percentages).
