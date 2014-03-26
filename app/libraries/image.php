@@ -248,6 +248,8 @@ class Image {
     );
 
     call_user_func_array('imagecopyresampled', array_values($params));
+    
+    imagedestroy($dst_image);
 
     return $this;
   }

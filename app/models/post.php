@@ -13,11 +13,11 @@ class Post extends Base {
 	}
 
 	private static function get($row, $val) {
-		return static::where(Base::table('posts.'.$row), '=', $val)
+		return static::left_join(Base::table('users'), Base::table('users.id'), '=', Base::table('posts.author'))
+			->where(Base::table('posts.'.$row), '=', $val)
 			->fetch(array(Base::table('posts.*'),
 				Base::table('users.id as author_id'),
-				Base::table('users.bio as author_bio'),
-				Base::table('users.real_name as author_name')));
+				Base::table('users.nickname as author_name')));
 	}
 
 	public static function listing($page = 1, $per_page = 10) {
@@ -29,7 +29,7 @@ class Post extends Base {
 		$total = $query->count();
 
 		// get posts
-		$posts = $query->sort('created', 'desc')
+		$posts = $query->sort('created', 'asc')
 			->take($per_page)
 			->skip(--$page * $per_page)
 			->get();

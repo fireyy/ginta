@@ -61,5 +61,27 @@ $(function() {
     a ? ($(b.previewTemplate).addClass("complete").attr("rel", a.id).find(".dropzone").attr("rel", a.id), $(b.previewTemplate).find("a.thumb,a.title").attr("href", a.html), $(b.previewTemplate).find("a.title").text(a.title), $(b.previewTemplate).find("a.edit").attr("href", a.edit), $(b.previewTemplate).find("ul").html(a.menu), $("#percent").stop().animate({
         width: a.percent + "%"
       }, 300), 80 <= a.percent && $("#percent").addClass("low")) : ($(b.previewTemplate).remove(), showerror(b.name + " couldn't be uploaded. Please try again."))
-  })
+  });
+  $(document).on("click","a.contextmenu",function(b){
+    b.preventDefault();
+    hideContext();
+    hideAction();
+    $(this).toggleClass("close").siblings("ul").toggle()
+  });
 });
+function hideAction(){
+  $("#projectMenu").hide();
+  $("#menu").removeClass("open");
+}
+function hideContext(){
+  $("a.contextmenu").removeClass("close");
+  $(".optMenu").hide();
+  $(".optMenu .confirm").show();
+  $(".optMenu .goDelete").hide();
+  $("#editProject").hide();
+}
+function hideMenus(){
+  $(document).on("click","html",function(c){
+    $(c.target).hasClass("contextmenu")||$(c.target).hasClass("confirm")||$(c.target).is("#proTools")||$(c.target).is("#person")||($(c.target).is("#menu")||$(c.target).is("#moreProjects")||$(c.target).is("#pallet")||$(c.target).is("#picker")?hideContext():(hideAction(),hideContext(),$("#pallet").hide()))
+  });
+}

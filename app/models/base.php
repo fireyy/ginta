@@ -10,6 +10,7 @@ class Base extends Record {
 		if( ! is_null($name)) return static::$prefix . $name;
 
 		return static::$prefix . static::$table;*/
+    if( ! is_null($name)) return $name;
     return static::$table;
 	}
 

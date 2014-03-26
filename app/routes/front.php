@@ -4,10 +4,8 @@
  * Home page
  */
 Route::get('/', function() {
-  //var_dump(convertIntToShortCode(1));exit();
-  $vars["guest"] = Auth::guest();
-  if(!$vars["guest"]){ 
-    $vars["user"] = Auth::user();
+  $vars = array();
+  if(!Auth::guest()){ 
     list($vars["total"], $vars["posts"]) = Post::listing();
   }
   return Template::create("home",$vars);
@@ -71,6 +69,29 @@ Route::post('upload', function() {
     Post::update($id, array(
       "slug" => $slug
     ));
+    $duoshuo = new Duoshuo();
+    $duoshuo_client = $duoshuo->getClient();
+    $url = "http://api.duoshuo.com/threads/import.json";
+    $threads = array();
+    $threads[] = array(
+      "thread_key" => $id,
+      "title" => $result["name"],
+      "url" => uri_to($slug)
+    );
+    $body = array(
+      "threads" => $threads,
+      "secret" => Config::app('duoshuo_secret', ''),
+      "short_name" => Config::app('duoshuo_short_name', '')
+    );
+    $body = http_build_query($body, '', '&');
+    $result = $duoshuo_client->http($url,$body,"POST");
+    $result = Json::decode($result);
+    if($result->code == 0){
+      /*$dt = get_object_vars($result->response);
+      Post::update($id, array(
+        "ds_thread_id" => $dt[$id]
+      ));*/
+    }
     $json = array(
       "id" => $post->id,
       "html" => $post->id,
@@ -84,6 +105,36 @@ Route::post('upload', function() {
     echo "fuck";
   }
   return Response::create(Json::encode($json), 200, array('content-type' => 'application/json'));
+});
+
+/*
+ * view
+ */
+Route::get('(:any)', function($slug) {
+  if(!$post = Post::slug($slug)){
+    return Response::error(404);
+  }
+  $comments = Comment::search(array(
+    "post" => $post->id
+  ));
+  $url = "http://ginta.duoshuo.com/api/threads/listPosts.json?thread_key=".$post->id;
+  $result = Http::request($url,"","GET");
+  $result = Json::decode($result);
+  $parentPosts = get_object_vars($result->parentPosts);
+  $note = array();
+  foreach($comments as $comment){
+    $note[] = array(
+      "x1" => $comment->x,
+      "edit" => "a id='view-".$comment->id."' title='Reply' href='/reply/".$comment->id."'",
+      "y1" => $comment->y,
+      "height" => $comment->height,
+      "width" => $comment->width,
+      "note" => "<div class='outer'><div class='inner'><p>".$parentPosts[$comment->duoshuo_id]->message."\r\n <span class='meta'>&mdash; ".$parentPosts[$comment->duoshuo_id]->author->name."</span></p></div></div><span class='tip'>&uarr;</span>"
+    );
+  }
+  $vars["post"] = $post;
+  $vars["note"] = $note;
+  return Template::create("view",$vars);
 });
 
 /*

@@ -47,4 +47,5 @@ if(is_admin()) {
 }
 else {
 	require APP . 'routes/front' . EXT;
+  require APP . 'routes/ajax' . EXT;
 }
