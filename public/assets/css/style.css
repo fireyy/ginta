@@ -24,6 +24,11 @@ strong{font-weight:700}
 ::selection{background:#5cc9e8;color:#fff;text-shadow:none}
 ::-moz-selection{background:#72d0eb;color:#fff;text-shadow:none}
 
+#container { width: 880px;margin: 0 auto;padding-top: 100px;font-size: 1.2em;}
+#container #content hgroup {float: left;width: 710px;margin: 0 0 0 50px;height: 80px;}
+#container #content hgroup h1 {font-size: 1.3em;padding: 8px 0 0;float: left;margin: 2px 0 0 -4px;font-weight: 500;color: #2f353e;}
+#container aside {float: left;width: 200px;margin: 0 0 0 40px;}
+
 ul#accountNav{position:fixed;top:10px;right:10px;z-index:100;-khtml-border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;background:#f4f4f5}
 ul#accountNav li{float:right;padding:0;margin:0}
 ul#accountNav li a{float:left;text-decoration: none;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.3em;line-height:1.5em;padding:10px 0;color:#2f353e;text-shadow:0 1px #fff}
@@ -46,8 +51,6 @@ ul#accountNav li ol#accountMenu li.upgrade a{color:#0ad}
 ul#accountNav li ol#accountMenu li.out{border-top:1px solid #e0e5e9;margin-top:8px}
 ul#accountNav li ol#accountMenu li.out a{padding-top:8px;color:#a5b3be;padding-bottom:10px}
 ul#accountNav li ol#accountMenu li.out a:hover{color:#879aa9}
-
-#container { width: 880px;margin: 0 auto;padding-top: 100px;}
 
 #images {float: left;width: 100%;padding-left: 43px;}
 #images li{float:left;width:186px;margin:0 8px 25px 4px;position: relative;}
@@ -107,3 +110,43 @@ section#archived ol li:target a{opacity:1!important}
 #ddPrompt p{display:table-cell;vertical-align:middle;text-align:center}
 #ddPrompt p strong{float:left;width:100%;margin:0 0 10px;font-size:2.5em;font-weight:500;text-shadow:0 1px 2px #005c77}
 #ddPrompt p em{font-size:1.3em;color:#aaebff}
+
+#details {width:697px!important;background:#f9f9fa;-khtml-border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}
+#details aside{margin:40px 0 40px 40px;width:164px;position:relative}
+#details aside a.thumb{float:left;width:164px;height:100px;overflow:hidden;background:#fff;-khtml-border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin:0 0 16px}
+#details aside a.thumb img{width:225px;margin:-12px 0 0 -31px}
+#details aside a.thumb.nofollow{cursor:wait}
+#details aside p{float:left;width:90%;font-size:1.1em;line-height:1.5em;color:#a5b3be;text-shadow:0 1px #fff;margin:0 0 30px}
+#details aside p a{color:#72889a}
+#details aside p a:hover{color:#546776}
+#details aside p.original{margin:0;font-size:.95em;text-shadow:none;color:#c2ccd4}
+#details aside p.meta{background:#fff;width:164px;padding:15px 10px;margin-left:-10px;-khtml-border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}
+#details form{float:right;width:390px;margin:40px 50px 50px 0}
+.buttongroup,#details form .radios,#details form h2,#details form label{float:left;width:100%}
+.buttongroup.hidden,#details form .radios.hidden,#details form h2.hidden,#details form label.hidden{display:none}
+.radios{margin:5px 0 14px;color:#879aa9}
+.radios span{float:left;margin-top:5px;font-size:1.1em}
+.radios label{padding:5px 0;margin:0}
+.radios label:hover{color:#6a8193}
+.radios .group{float:right;width:219px;margin:0}
+.radios .group input{display:inline-block;margin:0 15px 0 0}
+.radios .group select{width:105px;margin:0}
+.radios .group select.right{float:right}
+#details form h2{font-size:1.2em;color:#2f353e;font-weight:500;margin:2px 0 30px}
+label{position:relative;margin:0 0 10px;color:#879aa9}
+label input,#details form label span{display:inline-block}
+label input[type=text],#details form textarea{font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.25em;line-height:1.5em;padding:11px 10px 10px;border:1px solid #e0e5e9;color:#2f353e;width:198px;border-radius:3px;box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border linear .2s,box-shadow linear .2s;-moz-transition:border linear .2s,box-shadow linear .2s;-ms-transition:border linear .2s,box-shadow linear .2s;-o-transition:border linear .2s,box-shadow linear .2s;transition:border linear .2s,box-shadow linear .2s;background:#fff}
+label input[type=text]:focus,#details form textarea:focus{border-color:#7fd7f7!important;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(82,168,236,.6);outline:0;outline:thin dotted \9}
+label input[type=text]::-webkit-input-placeholder{color:#c2ccd4}
+label input[type=text]:-moz-placeholder{color:#c2ccd4}
+label span{font-size:1.1em;width:170px}
+.buttongroup{margin-top:30px;border-top:1px solid #e0e5e9;padding-top:15px}
+.buttongroup button{float:left;background:#a1c32c;color:#fff;border:1px solid #8fad27;border-radius:3px;-webkit-font-smoothing:antialiased;font-weight:500;font-size:1.1em;padding:10px 12px;margin-right: 10px;}
+.buttongroup button:focus,#details form .buttongroup button:hover{background:#95ba25;border-color:#7e9822}
+.buttongroup button:active{background:#89b11e;border-color:#6d831e;border-top-width:2px;padding-bottom:9px}
+.buttongroup button:disabled{background-color:#d1d9de;border-color:#b4c0c9}
+.buttongroup a.secondary{float:left;font-size:1.1em;padding:12px 0;margin:0 0 0 12px;color:#0ad}
+.buttongroup a.secondary:hover{color:#0083aa}
+.buttongroup label{float:left;width:auto;margin:0 0 0 15px;padding:14px 0 0}
+.buttongroup label input{margin-right:5px}
+#delete {background:#ec5021;color:#fff;border:1px solid #9a2e0d;}

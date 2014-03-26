@@ -19,8 +19,8 @@
 </div>
 
 <ul id="nav">
-	<li class="return"><a href="https://fireyy.prevue.it/pro/cjz" data-original-title="Return to project">Return to project</a></li>
-	<li class="edit"><a href="https://fireyy.prevue.it/edit/hullxk" data-original-title="Edit this image">Edit this image</a></li>
+	<li class="return"><a href="<?php echo uri_to("/"); ?>" data-original-title="Return to project">Return to project</a></li>
+	<li class="edit"><a href="<?php echo uri_to("edit/".$post->slug); ?>" data-original-title="Edit this image">Edit this image</a></li>
 	<li class="annotate"><a href="#" id="addnotelink" data-original-title="Add annotation">Add annotation</a></li>
 	<li id="tip" style="display:none;"></li>
 </ul>
