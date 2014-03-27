@@ -4,3 +4,4 @@ app/storage/databases/*
 app/storage/uploads/*
 app/storage/cache/*
 public/content/*
+.idea
