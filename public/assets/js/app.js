@@ -92,6 +92,12 @@ $(function() {
       }
     });
   });
+  $("#person").click(function(b){
+    b.preventDefault();
+    $("#accountMenu").toggle();
+    $(this).toggleClass("open");
+    $(".optMenu,#editProject").hide()
+  });
   hideMenus();
 });
 function hideAction(){

@@ -44,3 +44,4 @@ require APP . 'helpers' . EXT;
 require APP . 'routes/front' . EXT;
 require APP . 'routes/posts' . EXT;
 require APP . 'routes/ajax' . EXT;
+require APP . 'routes/users' . EXT;

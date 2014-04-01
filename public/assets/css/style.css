@@ -29,6 +29,9 @@ strong{font-weight:700}
 #container #content hgroup h1 {font-size: 1.3em;padding: 8px 0 0;float: left;margin: 2px 0 0 -4px;font-weight: 500;color: #2f353e;}
 #container aside {float: left;width: 200px;margin: 0 0 0 40px;}
 
+#logo {float: left;width: 960px;margin: 40px 0 40px 40px;}
+#logo a { float: left; width: 60px; height: 42px; overflow: hidden; text-indent: -9000px; background-image: url(../img/sprite.png); background-repeat: no-repeat; background-color: transparent; background-size: 600px 600px; background-position: center; margin: 25px 0;}
+
 ul#accountNav{position:fixed;top:10px;right:10px;z-index:100;-khtml-border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;background:#f4f4f5}
 ul#accountNav li{float:right;padding:0;margin:0}
 ul#accountNav li a{float:left;text-decoration: none;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.3em;line-height:1.5em;padding:10px 0;color:#2f353e;text-shadow:0 1px #fff}
@@ -115,6 +118,8 @@ section#archived ol li:target a{opacity:1!important}
 #details aside{margin:40px 0 40px 40px;width:164px;position:relative}
 #details aside a.thumb{float:left;width:164px;height:100px;overflow:hidden;background:#fff;-khtml-border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin:0 0 16px}
 #details aside a.thumb img{width:225px;margin:-12px 0 0 -31px}
+#details aside a.avatar { height: 164px;}
+#details aside a.avatar img { width: 164px; margin: 0;}
 #details aside a.thumb.nofollow{cursor:wait}
 #details aside p{float:left;width:90%;font-size:1.1em;line-height:1.5em;color:#a5b3be;text-shadow:0 1px #fff;margin:0 0 30px}
 #details aside p a{color:#72889a}
