@@ -68,6 +68,31 @@ $(function() {
     hideAction();
     $(this).toggleClass("close").siblings("ul").toggle()
   });
+  $(document).on("click","a.confirm",function(b){
+    b.preventDefault();
+    $(this).hide().siblings("a").show()
+  });
+  $(document).on("click",'a[rel="deleteImg"]',function(b){
+    b.preventDefault();
+    hideContext();
+    var a=$(this).attr("data-type");
+    $('*[rel="'+a+'"]').fadeTo(200,0.4);
+    $('*[rel="'+a+'"] .contextmenu').hide();
+    $.ajax({
+      type:"POST",
+      url:this.href,
+      dataType:"json",
+      success:function(b){
+        if(b.error == 0){
+          $('li[rel="'+a+'"] .toolbar').hide();
+          $('li[rel="'+a+'"]').animate({width:"0px",opacity:"0","margin-right":"0"},600,function(){$('li[rel="'+a+'"]').remove()});
+        }else{
+          alert(b.message);
+        }
+      }
+    });
+  });
+  hideMenus();
 });
 function hideAction(){
   $("#projectMenu").hide();
@@ -82,6 +107,7 @@ function hideContext(){
 }
 function hideMenus(){
   $(document).on("click","html",function(c){
-    $(c.target).hasClass("contextmenu")||$(c.target).hasClass("confirm")||$(c.target).is("#proTools")||$(c.target).is("#person")||($(c.target).is("#menu")||$(c.target).is("#moreProjects")||$(c.target).is("#pallet")||$(c.target).is("#picker")?hideContext():(hideAction(),hideContext(),$("#pallet").hide()))
+    $(c.target).hasClass("contextmenu") || $(c.target).hasClass("confirm") || 
+    $(c.target).is("#person") || (hideAction(),hideContext())
   });
 }

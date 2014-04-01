@@ -84,10 +84,10 @@ Route::post('upload', function() {
       "short_name" => Config::app('duoshuo_short_name', '')
     );
     $body = http_build_query($body, '', '&');
-    $result = $duoshuo_client->http($url,$body,"POST");
-    $result = Json::decode($result);
-    if($result->code == 0){
-      /*$dt = get_object_vars($result->response);
+    $result2 = $duoshuo_client->http($url,$body,"POST");
+    $result2 = Json::decode($result2);
+    if($result2->code == 0){
+      /*$dt = get_object_vars($result2->response);
       Post::update($id, array(
         "ds_thread_id" => $dt[$id]
       ));*/

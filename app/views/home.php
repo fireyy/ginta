@@ -1,21 +1,21 @@
 <?php echo $header; ?>
 <div id="container">
-  <ul id="images" data-submit="/upload/">
+  <ul id="images" data-submit="<?php echo uri_to("upload/"); ?>">
     <?php if(isset($posts)){ ?>
     <?php foreach($posts as $post){ ?>
-    <li class="image" rel="<?php echo $post->id; ?>" data-token="3">
-  		<a href="/<?php echo $post->slug; ?>" class="dropzone single thumb" rel="<?php echo $post->id; ?>">
+    <li class="image" rel="<?php echo $post->id; ?>" data-token="<?php echo $post->id; ?>">
+  		<a href="<?php echo uri_to($post->slug); ?>" class="dropzone single thumb" rel="<?php echo $post->id; ?>">
   			<img src="<?php echo getThumbURL($post->images); ?>" />
   		</a>
   		<div class="toolbar">
-  			<a href="/<?php echo $post->slug; ?>" class="title"><?php echo $post->title; ?></a>
-  			<a href="/edit/<?php echo $post->slug; ?>" title="Edit this image" class="contextmenu">Edit</a>
+  			<a href="<?php echo uri_to($post->slug); ?>" class="title"><?php echo $post->title; ?></a>
+  			<a href="<?php echo uri_to("edit/".$post->slug); ?>" title="Edit this image" class="contextmenu">Edit</a>
 	
   			<ul class="optMenu">
-  				<li><a href="<?php echo uri_to("/edit/".$post->slug); ?>">Edit</a></li>
+  				<li><a href="<?php echo uri_to("edit/".$post->slug); ?>">Edit</a></li>
   				<li>
   					<a class="confirm" href="javascript://">Delete</a>
-  					<a href="<?php echo uri_to("/ajax/delete/".$post->id); ?>" class="goDelete" rel="deleteImg" data-type="<?php echo $post->id; ?>" style="display: inline;">Yeah I'm sure</a>
+  					<a href="<?php echo uri_to("ajax/delete/".$post->id); ?>" class="goDelete" rel="deleteImg" data-type="<?php echo $post->id; ?>" style="display: inline;">Yeah I'm sure</a>
   				</li>
   			</ul>
   		</div>

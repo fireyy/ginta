@@ -1,7 +1,7 @@
 <?php
 
 /*
- * image upload
+ * 添加评论
  */
 Route::post('ajax/add/(:num)', function($id) {
   $json = array();
@@ -32,7 +32,8 @@ Route::post('ajax/add/(:num)', function($id) {
     "author_name" => $user->nickname,
     "author_email" => $user->email
   );
-  $result = $duoshuo_client->http($url,$body,"POST");
+  $result = $duoshuo_client->http($url,$body,"POST");include '../../system/database/record.php';
+  
   //var_dump($result);
   $result = Json::decode($result);
   Comment::create(array(
@@ -44,4 +45,23 @@ Route::post('ajax/add/(:num)', function($id) {
     "duoshuo_id" => $result->response->post_id
   ));
   return Response::create('<a href="https://fireyy.prevue.it/reply/35800" class="newnote" style="left:240px; top:344px; width: 100px; height: 100px;"></a><div id="finished"><p>Your annotation was saved. <a href="https://fireyy.prevue.it/reply/35800">View/Add a reply</a></p></div>', 202, array('content-type' => 'text/html'));
+});
+
+/*
+ * 删除
+ */
+Route::post('ajax/delete/(:num)', function($id) {
+  if(!$post = Post::find($id)){
+    return Response::error(404);
+  }
+  if(Post::where("id", "=", $id)->delete()){
+    $path = PATH.DS."public".DS."content".DS.$post->images;
+    $ext = pathinfo($post->images, PATHINFO_EXTENSION);
+    $thumb_p = str_replace(".".$ext, "_thumb.".$ext, $path);
+    unlink($path);
+    unlink($thumb_p);
+    return Response::create(Json::encode(array("error"=>0)), 200, array('content-type' => 'application/json'));
+  }else{
+    return Response::create(Json::encode(array("error"=>1, "message"=> "删除失败")), 200, array('content-type' => 'application/json'));
+  }
 });
