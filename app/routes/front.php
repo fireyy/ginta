@@ -94,12 +94,12 @@ Route::post('upload', function() {
     }
     $json = array(
       "id" => $post->id,
-      "html" => $post->id,
-      "edit" => $post->id,
+      "html" => uri_to($post->slug),
+      "edit" => uri_to("edit/".$post->slug),
       "thumb" => $result["thumb_name"],
       "title" => $result["name"],
       "percent" => $post->id,
-      "menu" => $post->id
+      "menu" => "\n\t\t\t\t\t\t\t<li><a href=\"".uri_to("edit/".$post->slug)."\">Edit</a></li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a class=\"confirm\" href=\"javascript:\/\/\">Delete</a>\n\t\t\t\t\t\t\t\t<a href=\"".uri_to("ajax/delete/".$post->id)."\" class=\"goDelete\" rel=\"deleteImg\" data-type=\"".$post->id."\">Yeah I'm sure</a>\n\t\t\t\t\t\t\t</li>"
     );
   }else{
     echo "fuck";

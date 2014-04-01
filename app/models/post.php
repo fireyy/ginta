@@ -29,7 +29,7 @@ class Post extends Base {
 		$total = $query->count();
 
 		// get posts
-		$posts = $query->sort('created', 'asc')
+		$posts = $query->sort('id', 'asc')
 			->take($per_page)
 			->skip(--$page * $per_page)
 			->get();
