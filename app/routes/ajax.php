@@ -32,7 +32,7 @@ Route::post('ajax/add/(:num)', function($id) {
     "author_name" => $user->nickname,
     "author_email" => $user->email
   );
-  $result = $duoshuo_client->http($url,$body,"POST");include '../../system/database/record.php';
+  $result = $duoshuo_client->http($url,$body,"POST");
   
   //var_dump($result);
   $result = Json::decode($result);
